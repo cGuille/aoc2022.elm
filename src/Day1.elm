@@ -37,7 +37,7 @@ reverseCompare a b =
       GT -> LT
 
 type alias ParsingState =
-    { parsed : List (List Int)
+    { result : List (List Int)
     , current : List Int
     , remaining : List String
     }
@@ -46,10 +46,10 @@ type alias ParsingState =
 parse : List String -> List (List Int)
 parse lines =
     let
-        result =
+        finalState =
             parseRec (ParsingState [] [] lines)
     in
-    result.parsed
+    finalState.result
 
 
 parseRec : ParsingState -> ParsingState
@@ -57,17 +57,17 @@ parseRec state =
     case state.remaining of
         head :: tail ->
             if String.isEmpty head then
-                parseRec (ParsingState (state.parsed ++ [ state.current ]) [] tail)
+                parseRec (ParsingState (state.result ++ [ state.current ]) [] tail)
 
             else
-                parseRec (ParsingState state.parsed (state.current ++ [ Maybe.withDefault 0 (String.toInt head) ]) tail)
+                parseRec (ParsingState state.result (state.current ++ [ Maybe.withDefault 0 (String.toInt head) ]) tail)
 
         [] ->
             if List.isEmpty state.current then
                 state
 
             else
-                ParsingState (state.parsed ++ [ state.current ]) [] []
+                ParsingState (state.result ++ [ state.current ]) [] []
 
 
 
