@@ -10,8 +10,8 @@ import Html.Events exposing (onInput)
 -- SOLUTION
 
 
-solution : String -> Int
-solution input =
+part1 : String -> Int
+part1 input =
     Maybe.withDefault 0
         (input
             |> String.lines
@@ -20,6 +20,21 @@ solution input =
             |> List.maximum
         )
 
+part2 : String -> Int
+part2 input =
+    input
+        |> String.lines
+        |> parse
+        |> List.map List.sum
+        |> List.sortWith reverseCompare
+        |> List.take 3
+        |> List.sum
+
+reverseCompare a b =
+    case compare a b of
+      LT -> GT
+      EQ -> EQ
+      GT -> LT
 
 type alias ParsingState =
     { parsed : List (List Int)
@@ -112,6 +127,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ div [] [ text (String.fromInt (solution model)) ]
+        [ div [] [ text (String.fromInt (part1 model)) ]
+        , div [] [ text (String.fromInt (part2 model)) ]
         , textarea [ cols 20, rows 20, onInput InputChange ] [ text model ]
         ]
