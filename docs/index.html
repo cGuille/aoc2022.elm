@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-UK">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>AoC 2022 as Elm practice</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <nav>
+        Pick a day: <select id="day-selector"></select>
+    </nav>
+
+    <main></main>
+
+    <footer>
+        <p><a href="https://github.com/cGuille/aoc2022.elm">Sources</a></p>
+    </footer>
+</body>
+
+<script src="elm-apps.js"></script>
+<script>
+    const main = document.querySelector('main');
+    const daySelector = document.querySelector('select#day-selector');
+
+    function addAppOption(appName) {
+        const option = document.createElement('option');
+
+        option.value = option.textContent = appName;
+
+        daySelector.appendChild(option);
+    }
+
+    function initSelectedApp() {
+        const appName = daySelector.selectedOptions[0].value;
+        // TODO
+
+        main.innerHTML = '';
+        const appRoot = document.createElement('div');
+        main.appendChild(appRoot);
+
+        Elm[appName].init({ node: appRoot });
+    }
+
+    Object.getOwnPropertyNames(Elm).forEach(addAppOption);
+
+    daySelector.addEventListener('change', initSelectedApp);
+    initSelectedApp();
+</script>
+
+</html>

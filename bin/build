@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -eu
+
+echo 'Compiling Elm apps…'
+
+elm make --optimize --output=docs/elm-apps.js src/Day*.elm
