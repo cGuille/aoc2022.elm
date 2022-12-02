@@ -29,55 +29,33 @@ solve scoreFunc input =
 
 
 
--- A: they pick rock
--- B: they pick paper
--- C: they pick scissors
--- X: I pick rock (+1pt)
--- Y: I pick paper (+1pt)
--- Z: I pick scissors (+1pt)
---
--- Win: 6pts
--- Draw: 3pts
--- Loss: 0pt
 score1 : String -> Int
 score1 line =
     case line of
-        "A X" -> 3 + 1
-        "B X" -> 0 + 1
-        "C X" -> 6 + 1
-        "A Y" -> 6 + 2
-        "B Y" -> 3 + 2
-        "C Y" -> 0 + 2
-        "A Z" -> 0 + 3
-        "B Z" -> 6 + 3
-        "C Z" -> 3 + 3
+        "A X" -> 3 + 1 -- They pick rock, I draw (3pts) with rock (+1pt)
+        "B X" -> 0 + 1 -- They pick paper, I lose (0pt) with rock (+1pt)
+        "C X" -> 6 + 1 -- They pick scissors, I win (6pt) with rock (+1pt)
+        "A Y" -> 6 + 2 -- They pick rock, I win (6pt) with paper (+2pt)
+        "B Y" -> 3 + 2 -- They pick paper, I draw (3pts) with paper (+2pt)
+        "C Y" -> 0 + 2 -- They pick scissors, I lose (0pt) with paper (+2pt)
+        "A Z" -> 0 + 3 -- They pick rock, I lose (0pt) with scissors (+3pt)
+        "B Z" -> 6 + 3 -- They pick paper, I win (6pt) with scissors (+3pt)
+        "C Z" -> 3 + 3 -- They pick scissors, I draw (3pts) with scissors (+3pt)
         _ -> 0
 
--- A: they pick rock
--- B: they pick paper
--- C: they pick scissors
--- X: I need to lose
--- Y: I need to draw
--- Z: I pick win
---
--- Win: 6pts
--- Draw: 3pts
--- Loss: 0pt
--- Picking rock: +1pt
--- Picking paper: +2pt
--- Picking scissors: +3pt
+
 score2 : String -> Int
 score2 line =
     case line of
-        "A X" -> 3 + 0 -- Rock, so I pick scissors to lose
-        "B X" -> 1 + 0 -- Paper, so I pick rock to lose
-        "C X" -> 2 + 0 -- Scissors, so I pick paper to lose
-        "A Y" -> 1 + 3 -- Rock, so I pick rock to draw
-        "B Y" -> 2 + 3 -- Paper, so I pick paper to draw
-        "C Y" -> 3 + 3 -- Scissors, so I pick scissors to draw
-        "A Z" -> 2 + 6 -- Rock, so I pick paper to win
-        "B Z" -> 3 + 6 -- Paper, so I pick scissors
-        "C Z" -> 1 + 6 -- Scissors, so I pick rock
+        "A X" -> 3 + 0 -- They pick rock, so I pick scissors (3pts) to lose (+0pt)
+        "B X" -> 1 + 0 -- They pick paper, so I pick rock (1pt) to lose (+0pt)
+        "C X" -> 2 + 0 -- They pick scissors, so I pick paper (2pts) to lose (+0pt)
+        "A Y" -> 1 + 3 -- They pick rock, so I pick rock (1pt) to draw (+3pts)
+        "B Y" -> 2 + 3 -- They pick paper, so I pick paper (2pts) to draw (+3pts)
+        "C Y" -> 3 + 3 -- They pick scissors, so I pick scissors (3pts) to draw (+3pts)
+        "A Z" -> 2 + 6 -- They pick rock, so I pick paper (2pts) to win (+6pts)
+        "B Z" -> 3 + 6 -- They pick paper, so I pick scissors (3pts) to win (+6pts)
+        "C Z" -> 1 + 6 -- They pick scissors, so I pick rock (1pt) to win (+6pts)
         _ -> 0
 
 
