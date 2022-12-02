@@ -5181,6 +5181,15 @@ var $author$project$Day2$update = F2(
 		return newInput;
 	});
 var $author$project$Day2$InputChange = $elm$core$Basics$identity;
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$Attributes$cols = function (n) {
 	return A2(
 		_VirtualDom_attribute,
@@ -5305,7 +5314,11 @@ var $author$project$Day2$view = function (model) {
 			[
 				A2(
 				$elm$html$Html$div,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('solution'),
+						$elm$html$Html$Attributes$class('part1')
+					]),
 				_List_fromArray(
 					[
 						$elm$html$Html$text(
@@ -5314,7 +5327,11 @@ var $author$project$Day2$view = function (model) {
 					])),
 				A2(
 				$elm$html$Html$div,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('solution'),
+						$elm$html$Html$Attributes$class('part2')
+					]),
 				_List_fromArray(
 					[
 						$elm$html$Html$text(
@@ -5325,6 +5342,7 @@ var $author$project$Day2$view = function (model) {
 				$elm$html$Html$textarea,
 				_List_fromArray(
 					[
+						$elm$html$Html$Attributes$class('input'),
 						$elm$html$Html$Attributes$cols(20),
 						$elm$html$Html$Attributes$rows(20),
 						$elm$html$Html$Events$onInput($elm$core$Basics$identity)
@@ -5599,7 +5617,11 @@ var $author$project$Day1$view = function (model) {
 			[
 				A2(
 				$elm$html$Html$div,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('solution'),
+						$elm$html$Html$Attributes$class('part1')
+					]),
 				_List_fromArray(
 					[
 						$elm$html$Html$text(
@@ -5608,7 +5630,11 @@ var $author$project$Day1$view = function (model) {
 					])),
 				A2(
 				$elm$html$Html$div,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('solution'),
+						$elm$html$Html$Attributes$class('part2')
+					]),
 				_List_fromArray(
 					[
 						$elm$html$Html$text(
@@ -5619,6 +5645,7 @@ var $author$project$Day1$view = function (model) {
 				$elm$html$Html$textarea,
 				_List_fromArray(
 					[
+						$elm$html$Html$Attributes$class('input'),
 						$elm$html$Html$Attributes$cols(20),
 						$elm$html$Html$Attributes$rows(20),
 						$elm$html$Html$Events$onInput($elm$core$Basics$identity)

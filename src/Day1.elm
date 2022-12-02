@@ -2,7 +2,7 @@ module Day1 exposing (..)
 
 import Browser
 import Html exposing (Html, div, text, textarea)
-import Html.Attributes exposing (cols, rows)
+import Html.Attributes exposing (class, cols, rows)
 import Html.Events exposing (onInput)
 
 
@@ -127,7 +127,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ div [] [ text (String.fromInt (part1 model)) ]
-        , div [] [ text (String.fromInt (part2 model)) ]
-        , textarea [ cols 20, rows 20, onInput InputChange ] [ text model ]
+        [ div [ class "solution", class "part1" ] [ text (String.fromInt (part1 model)) ]
+        , div [ class "solution", class "part2" ] [ text (String.fromInt (part2 model)) ]
+        , textarea [ class "input", cols 20, rows 20, onInput InputChange ] [ text model ]
         ]

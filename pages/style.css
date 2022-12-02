@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: auto;
+  margin-top: 1em;
+  width: 95%;
+  text-align: center;
+}
+
+.solution {
+  font-family: mono;
+}
+
+.solution.part1::before {
+  content: 'Part 1: ';
+}
+
+.solution.part2::before {
+  content: 'Part 2: ';
+}
