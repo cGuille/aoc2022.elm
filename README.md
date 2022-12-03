@@ -10,6 +10,7 @@ Solutions can be tried online at [aoc2022.cguille.net](https://aoc2022.cguille.n
 
 - Elm sources for the AoC solutions are in `src/`, 1 file per day.
 - GitHub pages sources are in `pages/`.
+- Run `bin/dev` to start a local server and automatically build on file changes.
 
 # Publish to GitHub pages
 

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -eu
+
+WATCH_DIRS="src pages"
+PORT="${PORT:-3000}"
+BINDING="localhost:${PORT}"
+
+echo "Starting web server on $BINDING…"
+php -S "$BINDING" -t docs &
+echo "Server started; browse on http://${BINDING}."
+
+echo "Watching for changes on: ${WATCH_DIRS}…"
+find $WATCH_DIRS | entr bin/build
