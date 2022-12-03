@@ -44,7 +44,18 @@
         Elm[appName].init({ node: appRoot });
     }
 
-    Object.getOwnPropertyNames(Elm).forEach(addAppOption);
+    function dayNum(appName) {
+        if (!appName.startsWith('Day')) {
+            throw new Error('App name does not start with "Day": ' + appName);
+        }
+
+        return parseInt(appName.substring(3), 10);
+    }
+
+    Object.getOwnPropertyNames(Elm)
+        .sort((dayX, dayY) => dayNum(dayY) - dayNum(dayX))
+        .forEach(addAppOption)
+    ;
 
     daySelector.addEventListener('change', initSelectedApp);
     initSelectedApp();
