@@ -2,8 +2,4 @@
 
 set -eu
 
-echo 'Copying pages assets…'
-cp -R pages/* docs/
-
-echo 'Compiling Elm apps…'
-elm make --optimize --output=docs/elm-apps.js src/Day*.elm
+bin/compile --optimize

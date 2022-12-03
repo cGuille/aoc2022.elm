@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -eu
+
+echo 'Copying pages assets…'
+cp -R pages/* docs/
+
+echo 'Compiling Elm apps…'
+elm make src/Day*.elm --output=docs/elm-apps.js "$@"

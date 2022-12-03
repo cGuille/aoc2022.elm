@@ -11,4 +11,4 @@ php -S "$BINDING" -t docs &
 echo "Server started; browse on http://${BINDING}."
 
 echo "Watching for changes on: ${WATCH_DIRS}…"
-find $WATCH_DIRS | entr bin/build
+find $WATCH_DIRS | entr bin/compile
