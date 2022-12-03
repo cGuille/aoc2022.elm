@@ -4370,7 +4370,7 @@ function _Browser_load(url)
 		}
 	}));
 }
-var $author$project$Day2$init = 'A Y\nB X\nC Z\n';
+var $author$project$Day3$init = 'vJrwpWtwJgWrhcsFMMfFFhFp\njqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL\nPmmdzqPrVvPwwTWBwg\nwMqvLMZHhHMvwLHjbvcjnnSBnvTQFn\nttgJtRGJQctTZtZT\nCrZsJsPPZsGzwwsLwLmpwMDw';
 var $elm$core$Basics$EQ = 1;
 var $elm$core$Basics$GT = 2;
 var $elm$core$Basics$LT = 0;
@@ -5175,12 +5175,12 @@ var $elm$browser$Browser$sandbox = function (impl) {
 			aF: impl.aF
 		});
 };
-var $author$project$Day2$update = F2(
+var $author$project$Day3$update = F2(
 	function (msg, model) {
 		var newInput = msg;
 		return newInput;
 	});
-var $author$project$Day2$InputChange = $elm$core$Basics$identity;
+var $author$project$Day3$InputChange = $elm$core$Basics$identity;
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -5231,6 +5231,331 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			$elm$html$Html$Events$alwaysStop,
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
+var $elm$core$Set$Set_elm_builtin = $elm$core$Basics$identity;
+var $elm$core$Dict$RBEmpty_elm_builtin = {$: -2};
+var $elm$core$Dict$empty = $elm$core$Dict$RBEmpty_elm_builtin;
+var $elm$core$Dict$foldl = F3(
+	function (func, acc, dict) {
+		foldl:
+		while (true) {
+			if (dict.$ === -2) {
+				return acc;
+			} else {
+				var key = dict.b;
+				var value = dict.c;
+				var left = dict.d;
+				var right = dict.e;
+				var $temp$func = func,
+					$temp$acc = A3(
+					func,
+					key,
+					value,
+					A3($elm$core$Dict$foldl, func, acc, left)),
+					$temp$dict = right;
+				func = $temp$func;
+				acc = $temp$acc;
+				dict = $temp$dict;
+				continue foldl;
+			}
+		}
+	});
+var $elm$core$Dict$Black = 1;
+var $elm$core$Dict$RBNode_elm_builtin = F5(
+	function (a, b, c, d, e) {
+		return {$: -1, a: a, b: b, c: c, d: d, e: e};
+	});
+var $elm$core$Dict$Red = 0;
+var $elm$core$Dict$balance = F5(
+	function (color, key, value, left, right) {
+		if ((right.$ === -1) && (!right.a)) {
+			var _v1 = right.a;
+			var rK = right.b;
+			var rV = right.c;
+			var rLeft = right.d;
+			var rRight = right.e;
+			if ((left.$ === -1) && (!left.a)) {
+				var _v3 = left.a;
+				var lK = left.b;
+				var lV = left.c;
+				var lLeft = left.d;
+				var lRight = left.e;
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					0,
+					key,
+					value,
+					A5($elm$core$Dict$RBNode_elm_builtin, 1, lK, lV, lLeft, lRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, 1, rK, rV, rLeft, rRight));
+			} else {
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					color,
+					rK,
+					rV,
+					A5($elm$core$Dict$RBNode_elm_builtin, 0, key, value, left, rLeft),
+					rRight);
+			}
+		} else {
+			if ((((left.$ === -1) && (!left.a)) && (left.d.$ === -1)) && (!left.d.a)) {
+				var _v5 = left.a;
+				var lK = left.b;
+				var lV = left.c;
+				var _v6 = left.d;
+				var _v7 = _v6.a;
+				var llK = _v6.b;
+				var llV = _v6.c;
+				var llLeft = _v6.d;
+				var llRight = _v6.e;
+				var lRight = left.e;
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					0,
+					lK,
+					lV,
+					A5($elm$core$Dict$RBNode_elm_builtin, 1, llK, llV, llLeft, llRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, 1, key, value, lRight, right));
+			} else {
+				return A5($elm$core$Dict$RBNode_elm_builtin, color, key, value, left, right);
+			}
+		}
+	});
+var $elm$core$Basics$compare = _Utils_compare;
+var $elm$core$Dict$insertHelp = F3(
+	function (key, value, dict) {
+		if (dict.$ === -2) {
+			return A5($elm$core$Dict$RBNode_elm_builtin, 0, key, value, $elm$core$Dict$RBEmpty_elm_builtin, $elm$core$Dict$RBEmpty_elm_builtin);
+		} else {
+			var nColor = dict.a;
+			var nKey = dict.b;
+			var nValue = dict.c;
+			var nLeft = dict.d;
+			var nRight = dict.e;
+			var _v1 = A2($elm$core$Basics$compare, key, nKey);
+			switch (_v1) {
+				case 0:
+					return A5(
+						$elm$core$Dict$balance,
+						nColor,
+						nKey,
+						nValue,
+						A3($elm$core$Dict$insertHelp, key, value, nLeft),
+						nRight);
+				case 1:
+					return A5($elm$core$Dict$RBNode_elm_builtin, nColor, nKey, value, nLeft, nRight);
+				default:
+					return A5(
+						$elm$core$Dict$balance,
+						nColor,
+						nKey,
+						nValue,
+						nLeft,
+						A3($elm$core$Dict$insertHelp, key, value, nRight));
+			}
+		}
+	});
+var $elm$core$Dict$insert = F3(
+	function (key, value, dict) {
+		var _v0 = A3($elm$core$Dict$insertHelp, key, value, dict);
+		if ((_v0.$ === -1) && (!_v0.a)) {
+			var _v1 = _v0.a;
+			var k = _v0.b;
+			var v = _v0.c;
+			var l = _v0.d;
+			var r = _v0.e;
+			return A5($elm$core$Dict$RBNode_elm_builtin, 1, k, v, l, r);
+		} else {
+			var x = _v0;
+			return x;
+		}
+	});
+var $elm$core$Dict$filter = F2(
+	function (isGood, dict) {
+		return A3(
+			$elm$core$Dict$foldl,
+			F3(
+				function (k, v, d) {
+					return A2(isGood, k, v) ? A3($elm$core$Dict$insert, k, v, d) : d;
+				}),
+			$elm$core$Dict$empty,
+			dict);
+	});
+var $elm$core$Dict$get = F2(
+	function (targetKey, dict) {
+		get:
+		while (true) {
+			if (dict.$ === -2) {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var key = dict.b;
+				var value = dict.c;
+				var left = dict.d;
+				var right = dict.e;
+				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
+				switch (_v1) {
+					case 0:
+						var $temp$targetKey = targetKey,
+							$temp$dict = left;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+					case 1:
+						return $elm$core$Maybe$Just(value);
+					default:
+						var $temp$targetKey = targetKey,
+							$temp$dict = right;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+				}
+			}
+		}
+	});
+var $elm$core$Dict$member = F2(
+	function (key, dict) {
+		var _v0 = A2($elm$core$Dict$get, key, dict);
+		if (!_v0.$) {
+			return true;
+		} else {
+			return false;
+		}
+	});
+var $elm$core$Dict$intersect = F2(
+	function (t1, t2) {
+		return A2(
+			$elm$core$Dict$filter,
+			F2(
+				function (k, _v0) {
+					return A2($elm$core$Dict$member, k, t2);
+				}),
+			t1);
+	});
+var $elm$core$Set$intersect = F2(
+	function (_v0, _v1) {
+		var dict1 = _v0;
+		var dict2 = _v1;
+		return A2($elm$core$Dict$intersect, dict1, dict2);
+	});
+var $elm$core$Tuple$second = function (_v0) {
+	var y = _v0.b;
+	return y;
+};
+var $author$project$Day3$compartmentsIntersect = function (compartments) {
+	return A2($elm$core$Set$intersect, compartments.a, compartments.b);
+};
+var $elm$core$Basics$ge = _Utils_ge;
+var $author$project$Day3$itemPriority = function (item) {
+	return ((item >= 'a') && (item <= 'z')) ? ($elm$core$Char$toCode(item) - 96) : (((item >= 'A') && (item <= 'Z')) ? ($elm$core$Char$toCode(item) - (64 - 26)) : 0);
+};
+var $elm$core$List$sum = function (numbers) {
+	return A3($elm$core$List$foldl, $elm$core$Basics$add, 0, numbers);
+};
+var $author$project$Day3$itemsPriority = function (items) {
+	return $elm$core$List$sum(
+		A2(
+			$elm$core$List$map,
+			$author$project$Day3$itemPriority,
+			$elm$core$Set$toList(items)));
+};
+var $elm$core$String$lines = _String_lines;
+var $elm$core$Set$empty = $elm$core$Dict$empty;
+var $elm$core$Set$insert = F2(
+	function (key, _v0) {
+		var dict = _v0;
+		return A3($elm$core$Dict$insert, key, 0, dict);
+	});
+var $elm$core$Set$fromList = function (list) {
+	return A3($elm$core$List$foldl, $elm$core$Set$insert, $elm$core$Set$empty, list);
+};
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $elm$core$String$right = F2(
+	function (n, string) {
+		return (n < 1) ? '' : A3(
+			$elm$core$String$slice,
+			-n,
+			$elm$core$String$length(string),
+			string);
+	});
+var $elm$core$String$foldr = _String_foldr;
+var $elm$core$String$toList = function (string) {
+	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
+};
+var $author$project$Day3$parseCompartments = function (rucksack) {
+	var half_len = ($elm$core$String$length(rucksack) / 2) | 0;
+	return _Utils_Tuple2(
+		$elm$core$Set$fromList(
+			$elm$core$String$toList(
+				A2($elm$core$String$left, half_len, rucksack))),
+		$elm$core$Set$fromList(
+			$elm$core$String$toList(
+				A2($elm$core$String$right, half_len, rucksack))));
+};
+var $author$project$Day3$part1 = function (input) {
+	return $elm$core$List$sum(
+		A2(
+			$elm$core$List$map,
+			$author$project$Day3$itemsPriority,
+			A2(
+				$elm$core$List$map,
+				$author$project$Day3$compartmentsIntersect,
+				A2(
+					$elm$core$List$map,
+					$author$project$Day3$parseCompartments,
+					$elm$core$String$lines(input)))));
+};
+var $elm$html$Html$Attributes$rows = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'rows',
+		$elm$core$String$fromInt(n));
+};
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $elm$html$Html$textarea = _VirtualDom_node('textarea');
+var $author$project$Day3$view = function (model) {
+	return A2(
+		$elm$html$Html$div,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('solution'),
+						$elm$html$Html$Attributes$class('part1')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$elm$core$String$fromInt(
+							$author$project$Day3$part1(model)))
+					])),
+				A2(
+				$elm$html$Html$textarea,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('input'),
+						$elm$html$Html$Attributes$cols(40),
+						$elm$html$Html$Attributes$rows(20),
+						$elm$html$Html$Events$onInput($elm$core$Basics$identity)
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(model)
+					]))
+			]));
+};
+var $author$project$Day3$main = $elm$browser$Browser$sandbox(
+	{aw: $author$project$Day3$init, aE: $author$project$Day3$update, aF: $author$project$Day3$view});
+var $author$project$Day2$init = 'A Y\nB X\nC Z\n';
+var $author$project$Day2$update = F2(
+	function (msg, model) {
+		var newInput = msg;
+		return newInput;
+	});
+var $author$project$Day2$InputChange = $elm$core$Basics$identity;
 var $author$project$Day2$score1 = function (line) {
 	switch (line) {
 		case 'A X':
@@ -5254,10 +5579,6 @@ var $author$project$Day2$score1 = function (line) {
 		default:
 			return 0;
 	}
-};
-var $elm$core$String$lines = _String_lines;
-var $elm$core$List$sum = function (numbers) {
-	return A3($elm$core$List$foldl, $elm$core$Basics$add, 0, numbers);
 };
 var $author$project$Day2$solve = F2(
 	function (scoreFunc, input) {
@@ -5297,15 +5618,6 @@ var $author$project$Day2$score2 = function (line) {
 var $author$project$Day2$part2 = function (input) {
 	return A2($author$project$Day2$solve, $author$project$Day2$score2, input);
 };
-var $elm$html$Html$Attributes$rows = function (n) {
-	return A2(
-		_VirtualDom_attribute,
-		'rows',
-		$elm$core$String$fromInt(n));
-};
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $elm$html$Html$textarea = _VirtualDom_node('textarea');
 var $author$project$Day2$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
@@ -5455,7 +5767,6 @@ var $author$project$Day1$part1 = function (input) {
 				$author$project$Day1$parse(
 					$elm$core$String$lines(input)))));
 };
-var $elm$core$Basics$compare = _Utils_compare;
 var $author$project$Day1$reverseCompare = F2(
 	function (a, b) {
 		var _v0 = A2($elm$core$Basics$compare, a, b);
@@ -5659,5 +5970,6 @@ var $author$project$Day1$view = function (model) {
 var $author$project$Day1$main = $elm$browser$Browser$sandbox(
 	{aw: $author$project$Day1$init, aE: $author$project$Day1$update, aF: $author$project$Day1$view});
 _Platform_export({'Day1':{'init':$author$project$Day1$main(
+	$elm$json$Json$Decode$succeed(0))(0)},'Day3':{'init':$author$project$Day3$main(
 	$elm$json$Json$Decode$succeed(0))(0)},'Day2':{'init':$author$project$Day2$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));
