@@ -4,6 +4,7 @@ import Browser
 import Html exposing (Html, div, text, textarea)
 import Html.Attributes exposing (class, cols, rows)
 import Html.Events exposing (onInput)
+import List.Split
 import Set exposing (Set)
 
 
@@ -58,6 +59,29 @@ itemPriority item =
         0
 
 
+part2 : String -> Int
+part2 input =
+    String.lines input
+        |> List.Split.chunksOfLeft 3 --> List (List String)
+        |> List.map commonItemPriority --> List Int
+        |> List.sum
+
+
+commonItemPriority : List String -> Int
+commonItemPriority rucksacks =
+    rucksacks
+        |> List.map String.toList --> List (List Char)
+        |> List.map Set.fromList --> List (Set Char)
+        |> intersectRec --> Set Char
+        |> itemsPriority
+
+intersectRec : List (Set comparable) -> Set comparable
+intersectRec sets =
+    case sets of
+        s1 :: s2 :: [] -> Set.intersect s1 s2
+        s1 :: s2 :: tail -> intersectRec ([ Set.intersect s1 s2 ] ++ tail)
+        _ -> Set.empty
+
 
 -- MAIN
 
@@ -108,5 +132,6 @@ view : Model -> Html Msg
 view model =
     div []
         [ div [ class "solution", class "part1" ] [ text (String.fromInt (part1 model)) ]
+        , div [ class "solution", class "part2" ] [ text (String.fromInt (part2 model)) ]
         , textarea [ class "input", cols 40, rows 20, onInput InputChange ] [ text model ]
         ]
