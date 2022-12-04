@@ -2,6 +2,8 @@
 
 set -eu
 
+echo "[$(date +%T)] COMPILE"
+
 echo 'Copying pages assets…'
 cp -R pages/* docs/
 
