@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.K.A === region.P.A)
+	if (region.L.A === region.G.A)
 	{
-		return 'on line ' + region.K.A;
+		return 'on line ' + region.L.A;
 	}
-	return 'on lines ' + region.K.A + ' through ' + region.P.A;
+	return 'on lines ' + region.L.A + ' through ' + region.G.A;
 }
 
 
@@ -2720,8 +2720,8 @@ var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
 		o: func(record.o),
-		L: record.L,
-		I: record.I
+		M: record.M,
+		J: record.J
 	}
 });
 
@@ -2990,10 +2990,10 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 
 		var value = result.a;
 		var message = !tag ? value : tag < 3 ? value.a : value.o;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.L;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.M;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.I) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.J) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3983,7 +3983,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 		impl.aE,
 		impl.aC,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.J && impl.J(sendToApp)
+			var divertHrefToApp = impl.K && impl.K(sendToApp)
 			var view = impl.aF;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
@@ -4058,7 +4058,7 @@ function _Browser_application(impl)
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		J: function(sendToApp)
+		K: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4370,7 +4370,7 @@ function _Browser_load(url)
 		}
 	}));
 }
-var $author$project$Day3$init = 'vJrwpWtwJgWrhcsFMMfFFhFp\njqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL\nPmmdzqPrVvPwwTWBwg\nwMqvLMZHhHMvwLHjbvcjnnSBnvTQFn\nttgJtRGJQctTZtZT\nCrZsJsPPZsGzwwsLwLmpwMDw';
+var $author$project$Day4$init = '2-4,6-8\n2-3,4-5\n5-7,7-9\n2-8,3-7\n6-6,4-6\n2-6,4-8';
 var $elm$core$Basics$EQ = 1;
 var $elm$core$Basics$GT = 2;
 var $elm$core$Basics$LT = 0;
@@ -5175,12 +5175,12 @@ var $elm$browser$Browser$sandbox = function (impl) {
 			aF: impl.aF
 		});
 };
-var $author$project$Day3$update = F2(
+var $author$project$Day4$update = F2(
 	function (msg, model) {
 		var newInput = msg;
 		return newInput;
 	});
-var $author$project$Day3$InputChange = $elm$core$Basics$identity;
+var $author$project$Day4$InputChange = $elm$core$Basics$identity;
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -5231,6 +5231,162 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			$elm$html$Html$Events$alwaysStop,
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
+var $author$project$Day4$fullyContains = F2(
+	function (r1, r2) {
+		var s2 = r2.L;
+		var s1 = r1.L;
+		var e2 = r2.G;
+		var e1 = r1.G;
+		return ((_Utils_cmp(s1, s2) < 1) && (_Utils_cmp(s2, e1) < 1)) && ((_Utils_cmp(s1, e2) < 1) && (_Utils_cmp(e2, e1) < 1));
+	});
+var $author$project$Day4$eitherFullyContains = F2(
+	function (r1, r2) {
+		return A2($author$project$Day4$fullyContains, r1, r2) || A2($author$project$Day4$fullyContains, r2, r1);
+	});
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var $elm$core$List$maybeCons = F3(
+	function (f, mx, xs) {
+		var _v0 = f(mx);
+		if (!_v0.$) {
+			var x = _v0.a;
+			return A2($elm$core$List$cons, x, xs);
+		} else {
+			return xs;
+		}
+	});
+var $elm$core$List$filterMap = F2(
+	function (f, xs) {
+		return A3(
+			$elm$core$List$foldr,
+			$elm$core$List$maybeCons(f),
+			_List_Nil,
+			xs);
+	});
+var $elm$core$String$lines = _String_lines;
+var $author$project$Day4$Range = F2(
+	function (start, end) {
+		return {G: end, L: start};
+	});
+var $author$project$Day4$rangeFromString = function (str) {
+	var _v0 = A2($elm$core$String$split, '-', str);
+	if ((_v0.b && _v0.b.b) && (!_v0.b.b.b)) {
+		var a = _v0.a;
+		var _v1 = _v0.b;
+		var b = _v1.a;
+		var _v2 = _Utils_Tuple2(
+			$elm$core$String$toInt(a),
+			$elm$core$String$toInt(b));
+		if ((!_v2.a.$) && (!_v2.b.$)) {
+			var i1 = _v2.a.a;
+			var i2 = _v2.b.a;
+			return $elm$core$Maybe$Just(
+				A2($author$project$Day4$Range, i1, i2));
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $author$project$Day4$parseLine = function (line) {
+	var _v0 = A2($elm$core$String$split, ',', line);
+	if ((_v0.b && _v0.b.b) && (!_v0.b.b.b)) {
+		var str1 = _v0.a;
+		var _v1 = _v0.b;
+		var str2 = _v1.a;
+		var _v2 = _Utils_Tuple2(
+			$author$project$Day4$rangeFromString(str1),
+			$author$project$Day4$rangeFromString(str2));
+		if ((!_v2.a.$) && (!_v2.b.$)) {
+			var r1 = _v2.a.a;
+			var r2 = _v2.b.a;
+			return $elm$core$Maybe$Just(
+				_Utils_Tuple2(r1, r2));
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm_community$basics_extra$Basics$Extra$uncurry = F2(
+	function (f, _v0) {
+		var a = _v0.a;
+		var b = _v0.b;
+		return A2(f, a, b);
+	});
+var $author$project$Day4$part1 = function (input) {
+	return $elm$core$List$length(
+		A2(
+			$elm$core$List$filter,
+			$elm_community$basics_extra$Basics$Extra$uncurry($author$project$Day4$eitherFullyContains),
+			A2(
+				$elm$core$List$filterMap,
+				$author$project$Day4$parseLine,
+				$elm$core$String$lines(input))));
+};
+var $elm$html$Html$Attributes$rows = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'rows',
+		$elm$core$String$fromInt(n));
+};
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $elm$html$Html$textarea = _VirtualDom_node('textarea');
+var $author$project$Day4$view = function (model) {
+	return A2(
+		$elm$html$Html$div,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('solution'),
+						$elm$html$Html$Attributes$class('part1')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$elm$core$String$fromInt(
+							$author$project$Day4$part1(model)))
+					])),
+				A2(
+				$elm$html$Html$textarea,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('input'),
+						$elm$html$Html$Attributes$cols(20),
+						$elm$html$Html$Attributes$rows(20),
+						$elm$html$Html$Events$onInput($elm$core$Basics$identity)
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(model)
+					]))
+			]));
+};
+var $author$project$Day4$main = $elm$browser$Browser$sandbox(
+	{aw: $author$project$Day4$init, aE: $author$project$Day4$update, aF: $author$project$Day4$view});
+var $author$project$Day3$init = 'vJrwpWtwJgWrhcsFMMfFFhFp\njqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL\nPmmdzqPrVvPwwTWBwg\nwMqvLMZHhHMvwLHjbvcjnnSBnvTQFn\nttgJtRGJQctTZtZT\nCrZsJsPPZsGzwwsLwLmpwMDw';
+var $author$project$Day3$update = F2(
+	function (msg, model) {
+		var newInput = msg;
+		return newInput;
+	});
+var $author$project$Day3$InputChange = $elm$core$Basics$identity;
 var $elm$core$Set$Set_elm_builtin = $elm$core$Basics$identity;
 var $elm$core$Dict$RBEmpty_elm_builtin = {$: -2};
 var $elm$core$Dict$empty = $elm$core$Dict$RBEmpty_elm_builtin;
@@ -5456,7 +5612,6 @@ var $author$project$Day3$itemsPriority = function (items) {
 			$author$project$Day3$itemPriority,
 			$elm$core$Set$toList(items)));
 };
-var $elm$core$String$lines = _String_lines;
 var $elm$core$Set$empty = $elm$core$Dict$empty;
 var $elm$core$Set$insert = F2(
 	function (key, _v0) {
@@ -5711,15 +5866,6 @@ var $author$project$Day3$part2 = function (input) {
 				3,
 				$elm$core$String$lines(input))));
 };
-var $elm$html$Html$Attributes$rows = function (n) {
-	return A2(
-		_VirtualDom_attribute,
-		'rows',
-		$elm$core$String$fromInt(n));
-};
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $elm$html$Html$textarea = _VirtualDom_node('textarea');
 var $author$project$Day3$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
@@ -6064,6 +6210,7 @@ var $author$project$Day1$view = function (model) {
 var $author$project$Day1$main = $elm$browser$Browser$sandbox(
 	{aw: $author$project$Day1$init, aE: $author$project$Day1$update, aF: $author$project$Day1$view});
 _Platform_export({'Day1':{'init':$author$project$Day1$main(
+	$elm$json$Json$Decode$succeed(0))(0)},'Day4':{'init':$author$project$Day4$main(
 	$elm$json$Json$Decode$succeed(0))(0)},'Day3':{'init':$author$project$Day3$main(
 	$elm$json$Json$Decode$succeed(0))(0)},'Day2':{'init':$author$project$Day2$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));
