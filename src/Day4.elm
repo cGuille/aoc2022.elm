@@ -19,6 +19,14 @@ part1 input =
         |> List.length
 
 
+part2 : String -> Int
+part2 input =
+    String.lines input
+        |> List.filterMap parseLine
+        |> List.filter (uncurry overlap)
+        |> List.length
+
+
 parseLine : String -> Maybe ( Range, Range )
 parseLine line =
     case String.split "," line of
@@ -55,6 +63,27 @@ fullyContains r1 r2 =
             r2.end
     in
     (s1 <= s2 && s2 <= e1) && (s1 <= e2 && e2 <= e1)
+
+
+overlap : Range -> Range -> Bool
+overlap r1 r2 =
+    let
+        s1 =
+            r1.start
+
+        e1 =
+            r1.end
+
+        s2 =
+            r2.start
+
+        e2 =
+            r2.end
+    in
+    (s1 <= s2 && s2 <= e1)
+        || (s1 <= e2 && e2 <= e1)
+        || (s2 <= s1 && s1 <= e2)
+        || (s2 <= e1 && e1 <= e2)
 
 
 type alias Range =
@@ -126,5 +155,6 @@ view : Model -> Html Msg
 view model =
     div []
         [ div [ class "solution", class "part1" ] [ text (String.fromInt (part1 model)) ]
+        , div [ class "solution", class "part2" ] [ text (String.fromInt (part2 model)) ]
         , textarea [ class "input", cols 20, rows 20, onInput InputChange ] [ text model ]
         ]

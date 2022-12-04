@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.L.A === region.G.A)
+	if (region.D.B === region.A.B)
 	{
-		return 'on line ' + region.L.A;
+		return 'on line ' + region.D.B;
 	}
-	return 'on lines ' + region.L.A + ' through ' + region.G.A;
+	return 'on lines ' + region.D.B + ' through ' + region.A.B;
 }
 
 
@@ -2721,7 +2721,7 @@ var _VirtualDom_mapEventRecord = F2(function(func, record)
 	return {
 		o: func(record.o),
 		M: record.M,
-		J: record.J
+		K: record.K
 	}
 });
 
@@ -2993,7 +2993,7 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.M;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.J) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.K) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3983,7 +3983,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 		impl.aE,
 		impl.aC,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.K && impl.K(sendToApp)
+			var divertHrefToApp = impl.L && impl.L(sendToApp)
 			var view = impl.aF;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
@@ -4058,7 +4058,7 @@ function _Browser_application(impl)
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		K: function(sendToApp)
+		L: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -5233,10 +5233,10 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 };
 var $author$project$Day4$fullyContains = F2(
 	function (r1, r2) {
-		var s2 = r2.L;
-		var s1 = r1.L;
-		var e2 = r2.G;
-		var e1 = r1.G;
+		var s2 = r2.D;
+		var s1 = r1.D;
+		var e2 = r2.A;
+		var e1 = r1.A;
 		return ((_Utils_cmp(s1, s2) < 1) && (_Utils_cmp(s2, e1) < 1)) && ((_Utils_cmp(s1, e2) < 1) && (_Utils_cmp(e2, e1) < 1));
 	});
 var $author$project$Day4$eitherFullyContains = F2(
@@ -5275,7 +5275,7 @@ var $elm$core$List$filterMap = F2(
 var $elm$core$String$lines = _String_lines;
 var $author$project$Day4$Range = F2(
 	function (start, end) {
-		return {G: end, L: start};
+		return {A: end, D: start};
 	});
 var $author$project$Day4$rangeFromString = function (str) {
 	var _v0 = A2($elm$core$String$split, '-', str);
@@ -5335,6 +5335,24 @@ var $author$project$Day4$part1 = function (input) {
 				$author$project$Day4$parseLine,
 				$elm$core$String$lines(input))));
 };
+var $author$project$Day4$overlap = F2(
+	function (r1, r2) {
+		var s2 = r2.D;
+		var s1 = r1.D;
+		var e2 = r2.A;
+		var e1 = r1.A;
+		return ((_Utils_cmp(s1, s2) < 1) && (_Utils_cmp(s2, e1) < 1)) || (((_Utils_cmp(s1, e2) < 1) && (_Utils_cmp(e2, e1) < 1)) || (((_Utils_cmp(s2, s1) < 1) && (_Utils_cmp(s1, e2) < 1)) || ((_Utils_cmp(s2, e1) < 1) && (_Utils_cmp(e1, e2) < 1))));
+	});
+var $author$project$Day4$part2 = function (input) {
+	return $elm$core$List$length(
+		A2(
+			$elm$core$List$filter,
+			$elm_community$basics_extra$Basics$Extra$uncurry($author$project$Day4$overlap),
+			A2(
+				$elm$core$List$filterMap,
+				$author$project$Day4$parseLine,
+				$elm$core$String$lines(input))));
+};
 var $elm$html$Html$Attributes$rows = function (n) {
 	return A2(
 		_VirtualDom_attribute,
@@ -5362,6 +5380,19 @@ var $author$project$Day4$view = function (model) {
 						$elm$html$Html$text(
 						$elm$core$String$fromInt(
 							$author$project$Day4$part1(model)))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('solution'),
+						$elm$html$Html$Attributes$class('part2')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$elm$core$String$fromInt(
+							$author$project$Day4$part2(model)))
 					])),
 				A2(
 				$elm$html$Html$textarea,
@@ -6052,7 +6083,7 @@ var $elm$core$List$maximum = function (list) {
 };
 var $author$project$Day1$ParsingState = F3(
 	function (result, current, remaining) {
-		return {z: current, ad: remaining, B: result};
+		return {z: current, ad: remaining, C: result};
 	});
 var $elm$core$List$isEmpty = function (xs) {
 	if (!xs.b) {
@@ -6081,7 +6112,7 @@ var $author$project$Day1$parseRec = function (state) {
 				var $temp$state = A3(
 					$author$project$Day1$ParsingState,
 					_Utils_ap(
-						state.B,
+						state.C,
 						_List_fromArray(
 							[state.z])),
 					_List_Nil,
@@ -6091,7 +6122,7 @@ var $author$project$Day1$parseRec = function (state) {
 			} else {
 				var $temp$state = A3(
 					$author$project$Day1$ParsingState,
-					state.B,
+					state.C,
 					_Utils_ap(
 						state.z,
 						_List_fromArray(
@@ -6109,7 +6140,7 @@ var $author$project$Day1$parseRec = function (state) {
 			return $elm$core$List$isEmpty(state.z) ? state : A3(
 				$author$project$Day1$ParsingState,
 				_Utils_ap(
-					state.B,
+					state.C,
 					_List_fromArray(
 						[state.z])),
 				_List_Nil,
@@ -6120,7 +6151,7 @@ var $author$project$Day1$parseRec = function (state) {
 var $author$project$Day1$parse = function (lines) {
 	var finalState = $author$project$Day1$parseRec(
 		A3($author$project$Day1$ParsingState, _List_Nil, _List_Nil, lines));
-	return finalState.B;
+	return finalState.C;
 };
 var $author$project$Day1$part1 = function (input) {
 	return A2(
